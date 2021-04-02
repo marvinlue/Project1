@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+   <body>
+      <table border = 1>
+        <tr>
+            {% for key in results[0].keys() %}
+            <th>
+                {{ key }}
+            </th>
+            {% endfor %}
+        </tr>
+        {% for result in results %}
+        <tr>
+            {% for key in results[0].keys() %}
+            <td>
+                {{result[key]}}
+            </td>    
+            {% endfor %}
+        </tr>
+        {% endfor %}
+        </tr>         
+      </table>
+   </body>
+</html>
