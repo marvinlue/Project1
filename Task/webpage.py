@@ -22,15 +22,23 @@ def startpage():
                 
             else:
                 scrape_results = scraper.github_api(search_term = search_term, num_pages=search_pageination)
-        
-            session['results'] = scrape_results
-            return redirect(url_for("resultpage"))
+            
+            if scrape_results == []:
+                return redirect(url_for("no_result"))
+
+            else:    
+                session['results'] = scrape_results
+                return redirect(url_for("resultpage"))
     
     return render_template('startpage.html')
 
 @app.route('/resultpage', methods = ['POST', 'GET'])
 def resultpage():
     return render_template("resultpage.html", results = session.pop('results', None))
+
+@app.route('/no_result', methods = ['POST', 'GET'])
+def no_result():
+    return render_template("no_result.html", results = session.pop('results', None))
 
 if __name__ == '__main__':
    app.run(debug=True)
